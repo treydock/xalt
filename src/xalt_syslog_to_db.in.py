@@ -379,6 +379,8 @@ def main():
   # Count the number and sum the run_time for all scalar jobs
 
   filter = Filter(100)
+  if fnSz == 0:
+    fnSz = 1
   pbar   = ProgressBar(maxVal=fnSz,fd=sys.stdout)
   for fn in fnA:
     if (not os.path.isfile(fn)):
