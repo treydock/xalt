@@ -453,9 +453,18 @@ def kinds_of_jobs(cursor, args, startdate, enddate):
 
      
   for k, entryT in sorted(resultT.iteritems(), key=lambda(k,v): v['corehours'], reverse=True):
-    pSU = "%.0f" % (100.0 * entryT['corehours']/totalT['corehours'])
-    pR  = "%.0f" % (100.0 * entryT['n_runs']   /float(totalT['n_runs']))
-    pJ  = "%.0f" % (100.0 * entryT['n_jobs']   /float(totalT['n_jobs']))
+    if totalT['corehours'] != 0.0:
+        pSU = "%.0f" % (100.0 * entryT['corehours']/totalT['corehours'])
+    else:
+        pSU = 0.0
+    if totalT['n_runs'] != 0.0:
+        pR  = "%.0f" % (100.0 * entryT['n_runs']   /float(totalT['n_runs']))
+    else:
+        pR = 0.0
+    if totalT['n_jobs'] != 0.0:
+        pJ  = "%.0f" % (100.0 * entryT['n_jobs']   /float(totalT['n_jobs']))
+    else:
+        pJ = 0.0
 
     resultA.append([k,
       "%.0f" % (entryT['corehours']), pSU,
